@@ -111,7 +111,7 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 
     .column-right {
         width: 65vw;
-        padding: 16rem;
+        padding: 16rem 4rem;
         background: -webkit-linear-gradient(to right, #F4011A, #400238 30%);
         background: linear-gradient(to right, #F4011A -40%, #400238 100%);
     }
