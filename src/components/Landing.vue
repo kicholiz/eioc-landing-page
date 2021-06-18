@@ -4,7 +4,7 @@ import { library } from '@fortawesome/fontawesome-svg-core';
     <div class="container">
         <div class="column column-left">
             <img class="logo" :src="require('@/images/ElizabethLogo.svg')" alt="Elizabeth Ojo Igbinoba Events Centre" />
-            <h1 class="align-left orange-yellow">For your social engagement.</h1>
+            <h1 class="align-left orange-yellow">For your <b>social engagement</b>.</h1>
             <ul class="align-left">
                 <li>Wedding Reception</li>
                 <li>Birthday</li>
@@ -13,13 +13,19 @@ import { library } from '@fortawesome/fontawesome-svg-core';
             </ul>
             <div class="spacing"></div>
             <div class="contact">
-                <h2 class="orange-yellow">Contact us</h2>
-                <ul>
-                    <li><font-awesome-icon :icon="envelope" />booking@eoic.ng</li>
-                    <li>08131286186</li>
-                    <li>08108127209</li>
-                </ul>
+                <div class="contact-left">
+                    <h2 class="orange-yellow">Contact us</h2>
+                    <ul>
+                        <li><font-awesome-icon :icon="envelope" />booking@eoic.ng</li>
+                        <li>08131286186</li>
+                        <li>08108127209</li>
+                    </ul>
+                </div>
+                <div class="contact-right">
+                    <img class="house" :src="require('@/images/house.jpg')" alt="Events" />
+                </div>
             </div>
+            
         </div>
         <div class="column column-right">
             <h2 class="appointment">Book An Appointment</h2>
@@ -39,13 +45,13 @@ import { library } from '@fortawesome/fontawesome-svg-core';
                     <input type="tel" id="phone" class="form-fields" v-model="phone" placeholder="08033965746" />
                 </div>
 
-                <div class="form-input-group">
+                <div class="form-input-group" style="align-items: start;">
                     <label for="message">Message*</label>
                     <textarea type="text" id="message" rows="8" class="form-fields" v-model="message" placeholder="Tell us about who you are and the event you are hosting. We will get back to you as soon as we can!" />
                 </div>
 
                 <div class="spacing"></div>
-                <button class="btn" type="submit"><span>Confirm Booking</span></button>
+                <button class="btn clear-right" type="submit"><span>Confirm Booking</span></button>
             </form>
         </div>
     </div>
@@ -82,6 +88,10 @@ import { library } from '@fortawesome/fontawesome-svg-core';
         height: 100vh;
     }
 
+    * {
+        box-sizing: border-box;
+    }
+
     .logo {
         height: 500px;
         width: 500px;
@@ -96,17 +106,26 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 
     .column-left {
         width: 35vw;
+        padding: 2rem 10rem;
     }
 
     .column-right {
         width: 65vw;
+        padding: 16rem;
         background: -webkit-linear-gradient(to right, #F4011A, #400238 30%);
         background: linear-gradient(to right, #F4011A -40%, #400238 100%);
     }
 
+    .contact-left {
+        width: 30%;
+    }
+
+    .contact-right {
+        width: 70%;
+    }
+
     .column {
         display: table-cell;
-        padding: 4rem 8rem;
         height: 100%;
         text-align: center;
         vertical-align: top;
@@ -124,22 +143,33 @@ import { library } from '@fortawesome/fontawesome-svg-core';
         text-align: right;
     }
 
+    .clear-right {
+        clear: both;
+        float: right;
+    }
+
     .contact {
         width: fit-content;
-        float: right;
         text-align: left;
+        display: flex;
     }
 
     .contact ul {
         list-style-type: none;
         padding-inline-start: 0em;
         line-height: 1.8rem;
+        width: fit-content;
         margin: 0;
     }
 
+    .house {
+        width: 100%;
+    }
+
     h1 {
-        font-size: 2.2rem;
-        line-height: 2.625rem;
+        font-size: 3.0rem;
+        line-height: 3.6rem;
+        font-weight: 300;
     }
 
     h2 {
@@ -166,64 +196,68 @@ import { library } from '@fortawesome/fontawesome-svg-core';
     }
 
     .form {
+    width: 50%;
+    margin: 0em auto;
     }
 
     .form-input-group {
         display: flex;
         align-items: center;
-        margin: 2em 0;
+        margin: 2em auto;
         flex-flow: row wrap;
         justify-content: center;
     }
 
     .form-input-group label {
         font-family: 'Avenir LT Std';
-        display: inline-block;
+        display: flex;
         text-transform: uppercase;
         color: #fff;
         font-size: 18px;
         line-height: 22px;
-        width: 120px;
+        width: 10vw;
+        max-width: 128px;
         text-align: left;
         vertical-align: top;
+        padding: 0 1em;
     }
 
     .form-fields {
         border: none;
-        display: inline-block;
+        flex-grow: 1;
         color: #111;
         font-size: 18px;
         line-height: 22px;
         padding: 8px 16px;
         width: 500px;
-        max-width: 500px;
+        max-width: 100%;
         border-radius: 4px;
         font-family: 'Avenir LT Std', sans-serif;
     }
 
-    input::placeholder {
+    input::placeholder, textarea::placeholder {
         color: #ADADAD;
     }
 
     .btn {
         padding: 16px 72px;
-        background-color: #fff;
+        background-color: #F8C010;
         font-family: 'Avenir LT Std';
         font-weight: 800;
         text-transform: uppercase;
     }
 
     .btn span {
-        background: -webkit-linear-gradient(to right, #f97112 30%, #f8c310);
-        background: linear-gradient(to right, #f97112 30%, #f8c310);
+        background: -webkit-linear-gradient(to right, #F4011A -40%, #400238 100%);
+        background: linear-gradient(to right, #F4011A -40%, #400238 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
     }
 
     .btn:hover {
         cursor: pointer;
-        background: -webkit-linear-gradient(to right, #f97112 30%, #f8c310);
-        background: linear-gradient(to right, #f97112 30%, #f8c310);
+        background: -webkit-linear-gradient(to left, #f97112 30%, #f8c310);
+        background: linear-gradient(to left, #f97112 30%, #f8c310);
         border: 2px solid #000;
     }
 
@@ -254,7 +288,19 @@ import { library } from '@fortawesome/fontawesome-svg-core';
         }
 
         .form-input-group label {
-        width:unset;
+            width: unset;
+        }
+
+        .contact-left, .contact-right {
+            width: 50%;
+        }
+
+        .form-input-group text-area {
+            width: 100%;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
         }
     }
 </style>
