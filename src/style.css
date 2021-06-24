@@ -1,0 +1,253 @@
+@font-face {
+    font-family: AvenirBlack;
+    src: url(fonts/AvenirLTStd-Black.otf);
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: AvenirBook;
+    src: url(fonts/AvenirLTStd-Book.otf);
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: AvenirRoman;
+    src: url(fonts/AvenirLTStd-Roman.otf);
+    font-weight: normal;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: AvenirBook, 'Avenir LT Std', sans-serif;
+    height: 100vh;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.logo {
+    width: 20vw;
+}
+
+.container {
+    display: table-row;
+    height: 100vh;
+    max-height: 100vh;
+    max-width: 100vw;
+}
+
+.column-left {
+    width: 35vw;
+    padding: 2rem 10rem;
+}
+
+.column-right {
+    width: 65vw;
+    padding: 4rem 4rem;
+    background: -webkit-linear-gradient(to right, #F4011A, #400238 30%);
+    background: linear-gradient(to right, #F4011A -40%, #400238 100%);
+}
+
+.contact-left {
+    width: 50%;
+}
+
+.contact-right {
+    width: 70%;
+}
+
+.column {
+    display: table-cell;
+    height: 100%;
+    text-align: center;
+    vertical-align: top;
+}
+
+.spacing {
+    height: 4em;
+}
+
+.align-left {
+    text-align: left;
+}
+
+.align-right {
+    text-align: right;
+}
+
+.contact {
+    width: fit-content;
+    text-align: left;
+    display: flex;
+}
+
+.contact ul {
+    list-style-type: none;
+    padding-inline-start: 0em;
+    line-height: 1.8rem;
+    width: fit-content;
+    margin: 0;
+}
+
+.house {
+    width: 100%;
+}
+
+h1 {
+    font-size: 3.0rem;
+    line-height: 3.6rem;
+    font-weight: 300;
+}
+
+h2 {
+    font-size: 1.5rem;
+    line-height: 2rem;
+}
+
+.orange-yellow {
+    background: -webkit-linear-gradient(to right, #f97112 30%, #f8c310);
+    background: linear-gradient(to right, #f97112 30%, #f8c310);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+ul {
+    padding-inline-start: 1.5em;
+    line-height: 1.6rem;
+    margin: 0;
+}
+
+.appointment {
+    color: #fff;
+    text-transform: uppercase;
+}
+
+.form {
+    width: 90%;
+    max-width: 90vw;
+    margin: 0em auto;
+    display: grid;
+    grid-auto-columns: 2fr;
+    justify-items: center;
+}
+
+.form-row {
+    display: flex;
+    flex-direction: row;
+}
+
+.form-input-group {
+    display: flex;
+    margin: 1em 1em;
+    flex-flow: column wrap;
+    justify-content: center;
+}
+
+.form-input-group label {
+    font-family: AvenirBook, 'Avenir LT Std', sans-serif;
+    display: flex;
+    text-transform: uppercase;
+    color: #fff;
+    font-size: 1.2rem;
+    line-height: 1.6rem;
+    text-align: left;
+}
+
+.form-fields {
+    border: none;
+    flex-grow: 1;
+    color: #111;
+    font-size: 18px;
+    line-height: 22px;
+    padding: 8px 16px;
+    width: 16vw;
+    min-width: 50%;
+    border-radius: 4px;
+    font-family: AvenirBook, 'Avenir LT Std', sans-serif;
+}
+
+input::placeholder, textarea::placeholder {
+    color: #ADADAD;
+}
+
+.full-width {
+    clear: both;
+    width: calc(32vw + 32px);
+}
+
+.btn {
+    padding: 16px 72px;
+    background-color: #F8C010;
+    font-family: AvenirBlack, 'Avenir LT Std', sans-serif;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+    .btn span {
+        background: -webkit-linear-gradient(to right, #F4011A -40%, #400238 100%);
+        background: linear-gradient(to right, #F4011A -40%, #400238 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .btn:hover {
+        cursor: pointer;
+        background: -webkit-linear-gradient(to left, #f97112 30%, #f8c310);
+        background: linear-gradient(to left, #f97112 30%, #f8c310);
+        border: 2px solid #000;
+    }
+
+        .btn:hover span {
+            color: #000;
+            background: none;
+            -webkit-background-clip: initial;
+            -webkit-text-fill-color: initial;
+        }
+
+@media (max-width: 991px) {
+    .logo {
+        margin-top: 10vw;
+        width: 90vw;
+        height: auto;
+    }
+
+    .container {
+        display: grid;
+    }
+
+    .column-left, .column-right {
+        display: table-cell;
+        width: 100vw;
+        padding: 1em;
+    }
+
+    .form-row {
+        flex-direction: column;
+    }
+
+    .spacing {
+        height: 1em;
+    }
+
+    .form-input-group label {
+        width: unset;
+    }
+
+    .form-fields {
+        width: 75vw;
+    }
+
+    .contact-left, .contact-right {
+        width: 50%;
+    }
+
+    .form-input-group text-area {
+        width: 100%;
+    }
+
+    .btn {
+        padding: 1rem 2rem;
+    }
+}

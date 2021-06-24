@@ -14,8 +14,10 @@ export default {
 </script>
 
 <style>
+@import 'style.css';
+
 #app {
-font-family: 'Avenir LT Std', sans-serif;
+font-family: AvenirBook, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   margin: 0;
