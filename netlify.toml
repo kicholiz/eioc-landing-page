@@ -1,3 +1,14 @@
 [build]
-
+command = "npm run build"
 functions = "functions"
+publish = "dist"
+
+[dev]
+port = 3000
+targetPort = 8080
+functions = "functions"
+functionsPort = 9000
+publish = "dist"
+
+[template.environment]
+FAUNADB_SERVER_SECRET="fnAENTcanbACDt9mc4C_Nv3DgVNGYyJzfttzATtQ"

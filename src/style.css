@@ -51,11 +51,15 @@ body {
 }
 
 .contact-left {
-    width: 50%;
+    /**width: 50%;*/
 }
 
 .contact-right {
     width: 70%;
+}
+
+.text {
+    color: #fff;
 }
 
 .column {
@@ -89,6 +93,10 @@ body {
     line-height: 1.8rem;
     width: fit-content;
     margin: 0;
+}
+
+.contact ul li svg {
+    margin-right: 8px;
 }
 
 .house {
@@ -240,7 +248,7 @@ input::placeholder, textarea::placeholder {
     }
 
     .contact-left, .contact-right {
-        width: 50%;
+        /**width: 50%;*/
     }
 
     .form-input-group text-area {

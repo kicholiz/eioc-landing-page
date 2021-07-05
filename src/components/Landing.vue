@@ -20,9 +20,11 @@
                         <li><font-awesome-icon :icon="['fas', 'phone']" /> 08108127209</li>
                     </ul>
                 </div>
-                <div class="contact-right">
-                    <img class="house" :src="require('@/images/house.jpg')" alt="Events" />
-                </div>
+                <!--
+                    <div class="contact-right">
+                        <img class="house" :src="require('@/images/house.jpg')" alt="Events" />
+                    </div>
+                -->
             </div>
 
         </div>
@@ -68,11 +70,11 @@
                 </div>
                 <div class="form-row">
                     <div class="form-input-group">
-                        <label for="budget">Estimated Budget</label>
+                        <label for="budget">Estimated Budget*</label>
                         <Field class="form-fields" v-model="budget" name="budget" placeholder="₦5000" />
                     </div>
                     <div class="form-input-group">
-                        <label for="guestCount">Guest Count</label>
+                        <label for="guestCount">Guest Count*</label>
                         <Field class="form-fields" v-model="guestCount" name="guestCount" placeholder="200" />
                     </div>
                 </div>
@@ -82,14 +84,21 @@
                         <textarea type="text" id="aboutEvent" rows="6" class="form-fields full-width" v-model="aboutEvent" placeholder="Tell us about who you are, describe the event, and give as much details of the event venue. We will get back to you as soon as we can!" />
                     </div>
                 </div>
-                <div class="spacing"></div>
-                <div class="full-width align-right">
-                    <button class="btn" type="submit"><span>Confirm Booking</span></button>
+                
+                <div class="full-width align-right" v-if="!isEventSubmitted">
+                    <div class="spacing"></div>
+                    <button @click.prevent="submitEvent" class="btn" type="submit"><span>Confirm Booking</span></button>
                 </div>
+
+                <!--if event is submitted-->
+                <div class="submittedForm" v-if="isEventSubmitted">
+                    <h2 class="appointment">Form submitted!</h2>
+                    <p class="text">A member of our team will reach out to you soon.</p>
+                </div>
+
             </Form>
         </div>
     </div>
-
 </template>
 
 <script>
@@ -103,23 +112,6 @@
             FontAwesomeIcon,
             Form,
             Field,
-        },
-        data() {
-            return {
-                eventTypes: [{
-                    "value": "Weddings",
-                }, {
-                "value": "Birthdays",
-                }, {
-                "value": "Sport Carnivals",
-                }, {
-                "value": "Corporate Gatherings"
-            }, {
-                "value": "Team Building Activities"
-            }, {
-                "value": "Other"
-                    }],
-            }
         },
         setup() {
             //reactive
@@ -135,10 +127,52 @@
                 guestCount: "",
                 aboutEvent: "",
             });
+
+            const eventTypes = ref([{
+                "value": "Weddings",
+            }, {
+                "value": "Birthdays",
+            }, {
+                "value": "Sport Carnivals",
+            }, {
+                "value": "Corporate Gatherings"
+            }, {
+                "value": "Team Building Activities"
+            }, {
+                "value": "Other"
+            }]);
+
+            const isEventSubmitted = ref(false);
+
+            const registerUser = () => {
+                fetch("/.netlify/functions/register", {
+                    method: "POST",
+                    body: JSON.stringify(formData),
+                })
+                    .then((response) => response.json())
+                    .then((body) => {
+                        console.log(body);
+                    });
+            };
+
+            //submit form
+            const submitEvent = () => {
+                fetch("/.netlify/functions/submit", {
+                    method: "POST",
+                    body: JSON.stringify(formData),
+                }).then((response) => response.json()).then((body) => {
+                    console.log(body);
+                    isEventSubmitted.value = true;
+                })
+            }
+
             return {
                 todayDate,
+                eventTypes,
                 ...toRefs(formData),
-                hover: false
+                isEventSubmitted,
+                registerUser,
+                submitEvent
             }
         },
     };
