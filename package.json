@@ -25,7 +25,8 @@
     "faunadb": "^4.3.0",
     "vee-validate": "^4.4.5",
     "vue": "^3.0.0",
-    "vue3-datepicker": "^0.2.4"
+    "vue3-datepicker": "^0.2.4",
+    "yup": "^0.32.9"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",

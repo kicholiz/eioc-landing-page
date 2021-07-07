@@ -214,6 +214,14 @@ input::placeholder, textarea::placeholder {
             -webkit-text-fill-color: initial;
         }
 
+.errors {
+    list-style: none;
+}
+
+.hidden {
+    display: none;
+}
+
 @media (max-width: 991px) {
     .logo {
         margin-top: 10vw;

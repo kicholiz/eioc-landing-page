@@ -30,7 +30,7 @@
         </div>
         <div class="column column-right">
             <h2 class="appointment">Get A Quote</h2>
-            <Form class="form">
+            <Form class="form" v-slot="{ errors }" @submit="submitEvent" :validation-schema="schema">
                 <div class="form-row">
                     <div class="form-input-group">
                         <label for="name">Full Name*</label>
@@ -65,7 +65,8 @@
                     </div>
                     <div class="form-input-group">
                         <label for="eventDate">Event Date*</label>
-                        <Datepicker class="form-fields" :lowerLimit="todayDate" v-model="eventDate" />
+                        <Datepicker class="form-fields" name="eventDate" :lowerLimit="todayDate" v-model="eventDate" />
+                        <Field class="hidden" v-model="eventDate" name="eventDate" />
                     </div>
                 </div>
                 <div class="form-row">
@@ -81,13 +82,20 @@
                 <div class="form-row">
                     <div class="form-input-group">
                         <label for="aboutEvent">Tell Us About Your Event*</label>
-                        <textarea type="text" id="aboutEvent" rows="6" class="form-fields full-width" v-model="aboutEvent" placeholder="Tell us about who you are, describe the event, and give as much details of the event venue. We will get back to you as soon as we can!" />
+                        <Field as="textarea" name="aboutEvent" rows="6" class="form-fields full-width" v-model="aboutEvent" placeholder="Tell us about who you are, describe the event, and give as much details of the event venue. We will get back to you as soon as we can!" />
                     </div>
                 </div>
-                
+                <template v-if="Object.keys(errors).length || errorMessage">
+                    <p class="text">{{errorMessage}}</p>
+                    <ul class="errors">
+                        <li class="text" v-for="(message, field) in errors" :key="field">
+                            {{ message }}
+                        </li>
+                    </ul>
+                </template>
                 <div class="full-width align-right" v-if="!isEventSubmitted">
                     <div class="spacing"></div>
-                    <button @click.prevent="submitEvent" class="btn" type="submit"><span>Confirm Booking</span></button>
+                    <button class="btn" type="submit"><span>Confirm Booking</span></button>
                 </div>
 
                 <!--if event is submitted-->
@@ -105,17 +113,25 @@
     import { reactive, ref, toRefs } from "vue";
     import Datepicker from 'vue3-datepicker';
     import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-    import { Form, Field } from 'vee-validate';
+    import { configure, Form, Field } from 'vee-validate';
+    import * as yup from 'yup';
+    configure({
+        validateOnBlur: true,
+        validateOnChange: true,
+        validateOnInput: false,
+        validateOnModelUpdate: true,
+    });
     export default {
         components: {
             Datepicker,
             FontAwesomeIcon,
             Form,
-            Field,
+            Field
         },
         setup() {
             //reactive
             const todayDate = ref(new Date());
+            const errorMessage = "";
             const formData = reactive({
                 name: "",
                 organisation: "",
@@ -142,6 +158,18 @@
                 "value": "Other"
             }]);
 
+            const schema = yup.object().shape({
+                name: yup.string().required("Please enter Full Name"),
+                organisation: yup.string().matches(/^[aA-zZ\s]+$/, "Only alphabets are allowed in Organisation Name").notRequired(),
+                email: yup.string().required("Please enter Email").email("Wrong format in Email"),
+                phone: yup.number("Only digits are allowed in Phone").notRequired(),
+                eventType: yup.string().required("Please choose an Event Type"),
+                eventDate: yup.date().min(new Date(), "Please choose a later date.").required(),
+                budget: yup.string().required("Please enter your Budget"),
+                guestCount: yup.number().positive("Please enter a number in Guest Count").required("Please enter Guest Count of event"),
+                aboutEvent: yup.string().required("Please tell us more about your event!")
+            });
+
             const isEventSubmitted = ref(false);
 
             const registerUser = () => {
@@ -167,6 +195,8 @@
             }
 
             return {
+                schema,
+                errorMessage,
                 todayDate,
                 eventTypes,
                 ...toRefs(formData),

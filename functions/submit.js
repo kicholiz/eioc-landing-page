@@ -9,6 +9,7 @@ exports.handler = (event, ctx, callback) => {
     console.log(`Function 'submit' invoked.`);
 
     let customerData = JSON.parse(event.body);
+
     const data = {
         name: customerData.name,
         organisation: customerData.organisation,
